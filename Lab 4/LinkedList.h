@@ -34,8 +34,11 @@ public:
     bool isEmpty();
     
     //Linked List Specific Functions
+    LinkNode<T>* getNode(T inputData);
     void appendNode(T inputData);
-    void insertNode(T inputData);
+    void prependNode(T inputData);
+    void insertNode(int pos, T inputData);
+    void insertNode(T obj, T inputData);
     void deleteNode(T inputData);
 };
 
@@ -65,6 +68,42 @@ template <typename T>
 bool SinglyLinkedList<T>::isEmpty()
 {
     return (start == nullptr);
+}
+
+template <typename T>
+LinkNode<T>* SinglyLinkedList<T>::getNode(T obj)
+{
+    if (start == nullptr)
+        return nullptr;
+    else
+    {
+        LinkNode<T>* nodePtr = start;
+        while (nodePtr != nullptr)
+        {
+            if (nodePtr->data == obj)
+                return nodePtr;
+            nodePtr = nodePtr->next;
+        }
+    }
+    return nullptr;
+}
+
+template <typename T>
+void SinglyLinkedList<T>::prependNode(T inputData)
+{
+    LinkNode<T>* newNode = new LinkNode<T>;
+    newNode -> data = inputData;
+    if(isEmpty())
+    {
+        start = newNode;
+        end = newNode;
+    }
+    else
+    {
+        newNode -> next = start;
+        start = newNode;
+    }
+    incrementCount();
 }
 
 template <typename T>
@@ -98,6 +137,54 @@ void SinglyLinkedList<T>::appendNode(T inputData)
     }
     
     incrementCount();
+}
+
+template <typename T>
+void SinglyLinkedList<T>::insertNode(int pos, T inputData)
+{
+    if(pos == 0)
+    {
+        prependNode(inputData);
+    }
+    else if(pos == count - 1)
+    {
+        appendNode(inputData);
+    }
+    else if(pos>0&&pos < count - 1)
+    {
+        LinkNode<T>* currNode = start; //Get to correct index
+        for(int i = 0;i<pos;i++)
+        {
+            currNode = currNode -> next;
+        }
+        LinkNode<T>* newNode = new LinkNode<T>; //insert new LinkNode
+        newNode -> data = inputData;
+        newNode -> next = currNode -> next;
+        currNode -> next = newNode;
+    }
+}
+
+template <typename T>
+void SinglyLinkedList<T>::insertNode(T obj, T inputData)
+{
+    if(start -> data == obj)
+    {
+        prependNode(inputData);
+    }
+    else if(end -> data == obj)
+    {
+        appendNode(inputData);
+    }
+    LinkNode<T>* currNode = start; //Get to correct index
+    while(currNode->data!=obj)
+    {
+        currNode = currNode -> next;
+    }
+    LinkNode<T>* newNode = new LinkNode<T>;//insert new LinkNode
+    newNode -> data = inputData;
+    newNode -> next = currNode -> next;
+    currNode -> next = newNode;
+
 }
 
 template <typename T>

@@ -15,6 +15,7 @@ class LinkNode
 public:
     T data;
     LinkNode* next;
+    LinkNode():next(nullptr){}
 };
 
 #endif /* LinkedNode_h */
