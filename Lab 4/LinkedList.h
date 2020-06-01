@@ -1,7 +1,8 @@
-#ifndef LinkedList_hpp
-#define LinkedList_hpp
+#ifndef LinkedList_h
+#define LinkedList_h
 
 #include <iostream>
+#include "LinkNode.h"
 using std::cout;
 using std::endl;
 
@@ -9,16 +10,9 @@ template <typename T>
 class SinglyLinkedList
 {
 protected:
-    struct LinkNode
-    {
-    public:
-        T data;
-        struct LinkNode* next;
-    };
-protected:
     int count;
-    LinkNode* start;
-    LinkNode* end;
+    LinkNode<T>* start;
+    LinkNode<T>* end;
     
 public:
     //Ctor
@@ -52,7 +46,7 @@ bool SinglyLinkedList<T>::find(T obj)
         return false;
     else
     {
-        LinkNode* nodePtr = nullptr;
+        LinkNode<T>* nodePtr = nullptr;
         nodePtr = start;
         
         while (nodePtr != nullptr)
@@ -76,11 +70,11 @@ bool SinglyLinkedList<T>::isEmpty()
 template <typename T>
 void SinglyLinkedList<T>::appendNode(T inputData)
 {
-    LinkNode* newNode = nullptr; // Points to new node
-    LinkNode* nodePtr = nullptr; // Move through the list
+    LinkNode<T>* newNode = nullptr; // Points to new node
+    LinkNode<T>* nodePtr = nullptr; // Move through the list
     
     //Make new node, populate with data and set next to nullptr
-    newNode = new LinkNode;
+    newNode = new LinkNode<T>;
     newNode->data = inputData;
     newNode->next = nullptr;
     
@@ -109,8 +103,8 @@ void SinglyLinkedList<T>::appendNode(T inputData)
 template <typename T>
 void SinglyLinkedList<T>::deleteNode(T inputData)
 {
-    LinkNode* nodePtr = nullptr;
-    LinkNode* previous = nullptr;
+    LinkNode<T>* nodePtr = nullptr;
+    LinkNode<T>* previous = nullptr;
     
     if (isEmpty())
         return;
@@ -148,8 +142,8 @@ void SinglyLinkedList<T>::deleteNode(T inputData)
 template<typename T>
 SinglyLinkedList<T>::~SinglyLinkedList()
 {
-    LinkNode* nodePtr;
-    LinkNode* next;
+    LinkNode<T>* nodePtr;
+    LinkNode<T>* next;
     
     nodePtr = start;
     while (nodePtr != nullptr)
@@ -162,7 +156,7 @@ SinglyLinkedList<T>::~SinglyLinkedList()
 template<typename T>
 void SinglyLinkedList<T>::printList() const
 {
-    LinkNode* nodePtr;
+    LinkNode<T>* nodePtr;
     nodePtr = start;
     
     while (nodePtr != nullptr)
@@ -173,4 +167,4 @@ void SinglyLinkedList<T>::printList() const
     cout << endl;
 }
 
-#endif /* LinkedList_hpp */
+#endif /* LinkedList_h */
