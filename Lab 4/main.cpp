@@ -1,5 +1,6 @@
 #include <iostream>
 #include "LinkedList.h"
+#include "Queue.h"
 using namespace std;
 int main()
 {
@@ -25,5 +26,25 @@ int main()
     thing.clear();
     cout<<thing.isEmpty()<<endl;
     cout<<thing.getCount()<<endl;
+    Queue<int> q;
+    for(int i=20;i>15;i--)
+    {
+        q.enqueue(i);
+    }
+    while(!q.isEmpty())
+    {
+        cout<<q.peekFront()<<" "<<q.peekRear()<<endl;
+        q.dequeue();
+    }
+    for(int i=20;i>15;i--)
+    {
+        q.enqueue(i);
+    }
+    q.clear();
+    while(!q.isEmpty())
+    {
+        cout<<q.peekFront()<<" "<<q.peekRear()<<endl;
+        q.dequeue();
+    }
     return 0;
 }
