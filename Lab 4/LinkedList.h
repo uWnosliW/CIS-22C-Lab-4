@@ -37,9 +37,9 @@ public:
     LinkNode<T>* getNode(T inputData);
     void appendNode(T inputData);
     void prependNode(T inputData);
-    void insertNode(int pos, T inputData);
     void insertNode(T obj, T inputData);
     void deleteNode(T inputData);
+    void clear();
 };
 
 template <typename T>
@@ -140,51 +140,25 @@ void SinglyLinkedList<T>::appendNode(T inputData)
 }
 
 template <typename T>
-void SinglyLinkedList<T>::insertNode(int pos, T inputData)
+void SinglyLinkedList<T>::insertNode(T obj, T inputData)
 {
-    if(pos == 0)
-    {
-        prependNode(inputData);
-    }
-    else if(pos == count - 1)
+    if(end -> data == obj)
     {
         appendNode(inputData);
     }
-    else if(pos>0&&pos < count - 1)
+    else
     {
         LinkNode<T>* currNode = start; //Get to correct index
-        for(int i = 0;i<pos;i++)
+        while(currNode->data!=obj)
         {
             currNode = currNode -> next;
         }
-        LinkNode<T>* newNode = new LinkNode<T>; //insert new LinkNode
+        LinkNode<T>* newNode = new LinkNode<T>;//insert new LinkNode
         newNode -> data = inputData;
         newNode -> next = currNode -> next;
         currNode -> next = newNode;
+        incrementCount();
     }
-}
-
-template <typename T>
-void SinglyLinkedList<T>::insertNode(T obj, T inputData)
-{
-    if(start -> data == obj)
-    {
-        prependNode(inputData);
-    }
-    else if(end -> data == obj)
-    {
-        appendNode(inputData);
-    }
-    LinkNode<T>* currNode = start; //Get to correct index
-    while(currNode->data!=obj)
-    {
-        currNode = currNode -> next;
-    }
-    LinkNode<T>* newNode = new LinkNode<T>;//insert new LinkNode
-    newNode -> data = inputData;
-    newNode -> next = currNode -> next;
-    currNode -> next = newNode;
-
 }
 
 template <typename T>
@@ -238,7 +212,8 @@ SinglyLinkedList<T>::~SinglyLinkedList()
         next = nodePtr->next;
         delete nodePtr;
         nodePtr = next;
-    }}
+    }
+}
 
 template<typename T>
 void SinglyLinkedList<T>::printList() const
@@ -253,5 +228,20 @@ void SinglyLinkedList<T>::printList() const
     }
     cout << endl;
 }
-
+template<typename T>
+void SinglyLinkedList<T>::clear()
+{
+    LinkNode<T>* nodePtr;
+    LinkNode<T>* next;
+    nodePtr = start;
+    while (nodePtr != nullptr)
+    {
+        next = nodePtr->next;
+        delete nodePtr;
+        nodePtr = next;
+    }
+    start = nullptr;
+    end = nullptr;
+    count = 0;
+}
 #endif /* LinkedList_h */
