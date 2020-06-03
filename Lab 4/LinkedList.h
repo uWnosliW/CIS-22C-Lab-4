@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include "LinkNode.h"
 using std::cout;
 using std::endl;
 using std::string;
