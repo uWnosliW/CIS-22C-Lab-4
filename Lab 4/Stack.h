@@ -19,9 +19,10 @@ public:
     virtual ~Stack() { };
     
     //Generic List type implementation functions
-    virtual void printList() const override;
+    virtual void print() const override;
     virtual bool isEmpty() override;
     virtual void clear() override;
+    virtual string getStructName() override { return "Stack"; }
     
     //Stack Specific Functions
     void push(T inputData);
@@ -30,9 +31,9 @@ public:
 };
 
 template<typename T>
-void Stack<T>::printList() const
+void Stack<T>::print() const
 {
-    SinglyLinkedList<T>::printList();
+    SinglyLinkedList<T>::print();
 }
 
 template<typename T>
@@ -57,7 +58,7 @@ template<typename T>
 void Stack<T>::pop(T &obj)
 {
     if (SinglyLinkedList<T>::isEmpty())
-        cerr << "Stack is empty." << endl;
+        cerr << this->getStructName() << " is empty." << endl;
     else
     {
         LinkNode<T>* ptr = nullptr;
@@ -75,7 +76,7 @@ template<typename T>
 void Stack<T>::peek(T &obj)
 {
     if (SinglyLinkedList<T>::isEmpty())
-        cerr << "Stack is empty." << endl;
+        cerr << this->getStructName() << " is empty." << endl;
     else
         obj = SinglyLinkedList<T>::start->data;
 }
