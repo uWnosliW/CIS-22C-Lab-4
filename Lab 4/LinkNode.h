@@ -10,12 +10,11 @@
 #define LinkNode_h
 
 template <typename T>
-class LinkNode
+struct LinkNode
 {
 public:
     T data;
     LinkNode* next;
-    LinkNode():next(nullptr){}
 };
 
 #endif /* LinkedNode_h */
