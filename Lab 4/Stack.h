@@ -4,16 +4,24 @@
 #include <iostream>
 #include "LinkedList.hpp"
 #include "LinkNode.hpp"
+using std::cout;
+using std::endl;
+using std::cerr;
 
 template<typename T>
-class Stack : public SinglyLinkedList<T>
+class Stack : protected SinglyLinkedList<T>
 {
 public:
     //Ctor
-    Stack() : SinglyLinkedList<T>() { };
+    Stack() : SinglyLinkedList<T>() { }
     
     //Dtor
     virtual ~Stack() { };
+    
+    //Generic List type implementation functions
+    virtual void printList() const override;
+    virtual bool isEmpty() override;
+    virtual void clear() override;
     
     //Stack Specific Functions
     void push(T inputData);
@@ -22,59 +30,54 @@ public:
 };
 
 template<typename T>
+void Stack<T>::printList() const
+{
+    SinglyLinkedList<T>::printList();
+}
+
+template<typename T>
+bool Stack<T>::isEmpty()
+{
+    return SinglyLinkedList<T>::isEmpty();
+}
+
+template<typename T>
+void Stack<T>::clear()
+{
+    SinglyLinkedList<T>::clear();
+}
+
+template<typename T>
 void Stack<T>::push(T inputData)
 {
-    LinkNode<T>* newNode = nullptr;
-    
-    //allocate memory
-    newNode = (LinkNode<T>*)malloc(sizeof(LinkNode<T>));
-    //newNode = new LinkNode<T>;
-    
-    //if memory allocation success
-    if (newNode != nullptr)
-    {
-        newNode->data = inputData;
-        
-        if(this->isEmpty())
-        {
-            this->start = newNode;
-            this->end = newNode;
-            newNode->next = nullptr;
-        }else
-        {
-            newNode->next = this->start;
-            this->start = newNode;
-        }
-        
-        this->incrementCount();
-    }
+    SinglyLinkedList<T>::prependNode(inputData);
 }
 
 template<typename T>
 void Stack<T>::pop(T &obj)
 {
-    LinkNode<T>* ptr = nullptr;
-    
-    if (this->isEmpty())
-        std::cerr << "Stack is empty." << std::endl;
+    if (SinglyLinkedList<T>::isEmpty())
+        cerr << "Stack is empty." << endl;
     else
     {
-        obj = this->start->data;
-        ptr = this->start->next;
-        delete this->start;
-        this->start = ptr;
+        LinkNode<T>* ptr = nullptr;
         
-        this->decrementCount();
+        obj = SinglyLinkedList<T>::start->data;
+        ptr = SinglyLinkedList<T>::start->next;
+        delete SinglyLinkedList<T>::start;
+        SinglyLinkedList<T>::start = ptr;
+
+        SinglyLinkedList<T>::decrementCount();
     }
 }
 
 template<typename T>
 void Stack<T>::peek(T &obj)
 {
-    if (this->isEmpty())
-        std::cerr << "Stack is empty." << std::endl;
+    if (SinglyLinkedList<T>::isEmpty())
+        cerr << "Stack is empty." << endl;
     else
-        obj = this->start->data;
+        obj = SinglyLinkedList<T>::start->data;
 }
 
 #endif /* Stack_hpp */
