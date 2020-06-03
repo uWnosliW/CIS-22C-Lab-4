@@ -26,6 +26,7 @@
 		C827F95C2486FE980066AC6D /* Queue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Queue.h; sourceTree = "<group>"; };
 		C87D57B324857A29005BD897 /* Lab 4 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Lab 4"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C87D57B624857A29005BD897 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		C89A57E724881FE200E57AC2 /* Stack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Stack.h; sourceTree = "<group>"; };
 		C89AC60824857C9A00A4FC84 /* LinkedList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LinkedList.h; sourceTree = "<group>"; };
 		C89AC60924857ED400A4FC84 /* LinkNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LinkNode.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -60,6 +61,7 @@
 		C87D57B524857A29005BD897 /* Lab 4 */ = {
 			isa = PBXGroup;
 			children = (
+				C89A57E724881FE200E57AC2 /* Stack.h */,
 				C87D57B624857A29005BD897 /* main.cpp */,
 				C89AC60824857C9A00A4FC84 /* LinkedList.h */,
 				C89AC60924857ED400A4FC84 /* LinkNode.h */,

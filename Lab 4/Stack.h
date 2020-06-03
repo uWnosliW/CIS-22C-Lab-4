@@ -27,7 +27,7 @@ public:
     //Stack Specific Functions
     void push(T inputData);
     void pop(T &obj);
-    void peek(T &obj);
+    T peek();
 };
 
 template<typename T>
@@ -73,12 +73,12 @@ void Stack<T>::pop(T &obj)
 }
 
 template<typename T>
-void Stack<T>::peek(T &obj)
+T Stack<T>::peek()
 {
     if (SinglyLinkedList<T>::isEmpty())
         cerr << this->getStructName() << " is empty." << endl;
     else
-        obj = SinglyLinkedList<T>::start->data;
+        return SinglyLinkedList<T>::start->data;
 }
 
 #endif /* Stack_hpp */
