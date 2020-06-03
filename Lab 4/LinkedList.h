@@ -2,7 +2,6 @@
 #define LinkedList_h
 
 #include <iostream>
-#include "LinkNode.h"
 using std::cout;
 using std::endl;
 
@@ -13,14 +12,6 @@ protected:
     int count;
     LinkNode<T>* start;
     LinkNode<T>* end;
-
-protected:
-    //Linked List Specific Functions
-    LinkNode<T>* getNode(T inputData);
-    void appendNode(T inputData);
-    void prependNode(T inputData);
-    void insertNode(T obj, T inputData);
-    void deleteNode(T inputData);
     
 public:
     //Ctor
@@ -38,15 +29,23 @@ public:
     
     //Generic List type implementation functions
     bool find(T obj);
-    void printList() const;
-    bool isEmpty();
-    void clear();
+    virtual void printList() const;
+    virtual bool isEmpty();
+    virtual void clear();
+    
+    //Node Operations
+    LinkNode<T>* getNode(T inputData);
+    void appendNode(T inputData);
+    void prependNode(T inputData);
+    void insertNode(T obj, T inputData);
+    void deleteNode(T inputData);
+    
 };
 
 template <typename T>
 bool SinglyLinkedList<T>::find(T obj)
 {
-    if (start == nullptr)
+    if (isEmpty())
         return false;
     else
     {
@@ -63,7 +62,6 @@ bool SinglyLinkedList<T>::find(T obj)
         return false;
     }
 }
-
 
 template <typename T>
 bool SinglyLinkedList<T>::isEmpty()
@@ -98,10 +96,11 @@ void SinglyLinkedList<T>::prependNode(T inputData)
     {
         start = newNode;
         end = newNode;
+        newNode->next = nullptr;
     }
     else
     {
-        newNode -> next = start;
+        newNode->next = start;
         start = newNode;
     }
     incrementCount();
