@@ -20,7 +20,7 @@ int main()
     thing.insertNode(17, 34);
     thing.deleteNode(33);
     thing.deleteNode(34);
-    thing.printList();
+    thing.print();
     cout<<thing.isEmpty()<<endl;
     cout<<thing.getCount()<<endl;
     thing.clear();

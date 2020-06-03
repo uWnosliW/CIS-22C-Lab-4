@@ -66,7 +66,7 @@ void Queue<T>::clear()
 }
 
 template<typename T>
-bool Queue<T>::isEmptys()
+bool Queue<T>::isEmpty()
 {
     return SinglyLinkedList<T>::isEmpty();
 }
