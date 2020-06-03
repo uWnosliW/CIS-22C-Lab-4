@@ -13,6 +13,14 @@ protected:
     int count;
     LinkNode<T>* start;
     LinkNode<T>* end;
+
+protected:
+    //Linked List Specific Functions
+    LinkNode<T>* getNode(T inputData);
+    void appendNode(T inputData);
+    void prependNode(T inputData);
+    void insertNode(T obj, T inputData);
+    void deleteNode(T inputData);
     
 public:
     //Ctor
@@ -32,13 +40,6 @@ public:
     bool find(T obj);
     void printList() const;
     bool isEmpty();
-    
-    //Linked List Specific Functions
-    LinkNode<T>* getNode(T inputData);
-    void appendNode(T inputData);
-    void prependNode(T inputData);
-    void insertNode(T obj, T inputData);
-    void deleteNode(T inputData);
     void clear();
 };
 
@@ -203,6 +204,13 @@ void SinglyLinkedList<T>::deleteNode(T inputData)
 template<typename T>
 SinglyLinkedList<T>::~SinglyLinkedList()
 {
+    if (!isEmpty())
+        clear();
+}
+
+template<typename T>
+void SinglyLinkedList<T>::clear()
+{
     LinkNode<T>* nodePtr;
     LinkNode<T>* next;
     
@@ -213,6 +221,10 @@ SinglyLinkedList<T>::~SinglyLinkedList()
         delete nodePtr;
         nodePtr = next;
     }
+    
+    start = nullptr;
+    end = nullptr;
+    count = 0;
 }
 
 template<typename T>
@@ -223,25 +235,11 @@ void SinglyLinkedList<T>::printList() const
     
     while (nodePtr != nullptr)
     {
-        cout << nodePtr->data << " ";
+        T temp = nodePtr->data;
+        
+        cout << temp << " ";
         nodePtr = nodePtr->next;
     }
     cout << endl;
-}
-template<typename T>
-void SinglyLinkedList<T>::clear()
-{
-    LinkNode<T>* nodePtr;
-    LinkNode<T>* next;
-    nodePtr = start;
-    while (nodePtr != nullptr)
-    {
-        next = nodePtr->next;
-        delete nodePtr;
-        nodePtr = next;
-    }
-    start = nullptr;
-    end = nullptr;
-    count = 0;
 }
 #endif /* LinkedList_h */
