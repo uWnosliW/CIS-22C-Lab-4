@@ -2,8 +2,10 @@
 #define LinkedList_h
 
 #include <iostream>
+#include <string>
 using std::cout;
 using std::endl;
+using std::string;
 
 template <typename T>
 class SinglyLinkedList
@@ -29,9 +31,10 @@ public:
     
     //Generic List type implementation functions
     bool find(T obj);
-    virtual void printList() const;
+    virtual void print() const;
     virtual bool isEmpty();
     virtual void clear();
+    virtual string getStructName() { return "Linked List"; }
     
     //Node Operations
     LinkNode<T>* getNode(T inputData);
@@ -135,7 +138,6 @@ void SinglyLinkedList<T>::appendNode(T inputData)
         nodePtr->next = newNode;
         end = nodePtr->next;
     }
-    
     incrementCount();
 }
 
@@ -227,7 +229,7 @@ void SinglyLinkedList<T>::clear()
 }
 
 template<typename T>
-void SinglyLinkedList<T>::printList() const
+void SinglyLinkedList<T>::print() const
 {
     LinkNode<T>* nodePtr;
     nodePtr = start;
