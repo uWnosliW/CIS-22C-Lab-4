@@ -19,7 +19,7 @@ public:
     virtual ~Stack() { };
     
     //Generic List type implementation functions
-    virtual void print() const override;
+    virtual void print() override;
     virtual bool isEmpty() override;
     virtual void clear() override;
     virtual string getStructName() override { return "Stack"; }
@@ -27,11 +27,11 @@ public:
     //Stack Specific Functions
     void push(T inputData);
     void pop(T &obj);
-    T peek();
+    void peek(T &obj);
 };
 
 template<typename T>
-void Stack<T>::print() const
+void Stack<T>::print()
 {
     SinglyLinkedList<T>::print();
 }
@@ -58,27 +58,27 @@ template<typename T>
 void Stack<T>::pop(T &obj)
 {
     if (SinglyLinkedList<T>::isEmpty())
-        cerr << this->getStructName() << " is empty." << endl;
-    else
     {
-        LinkNode<T>* ptr = nullptr;
-        
-        obj = SinglyLinkedList<T>::start->data;
-        ptr = SinglyLinkedList<T>::start->next;
-        delete SinglyLinkedList<T>::start;
-        SinglyLinkedList<T>::start = ptr;
-
-        SinglyLinkedList<T>::decrementCount();
+        cerr << this->getStructName() << " is empty." << endl;
+        return;
     }
+    
+    obj = SinglyLinkedList<T>::start->data;
+    SinglyLinkedList<T>::deleteNode(SinglyLinkedList<T>::start->data);
+    SinglyLinkedList<T>::decrementCount();
 }
 
 template<typename T>
-T Stack<T>::peek()
+void Stack<T>::peek(T &obj)
 {
     if (SinglyLinkedList<T>::isEmpty())
+    {
         cerr << this->getStructName() << " is empty." << endl;
-    else
-        return SinglyLinkedList<T>::start->data;
+        return;
+    }
+    
+    obj = SinglyLinkedList<T>::start->data;
 }
+
 
 #endif /* Stack_hpp */
