@@ -154,6 +154,8 @@ void SinglyLinkedList<T>::insertNode(T obj, T inputData)
         LinkNode<T>* currNode = start; //Get to correct index
         while(currNode->data!=obj)
         {
+            if (currNode->next == nullptr)
+                break;
             currNode = currNode -> next;
         }
         LinkNode<T>* newNode = new LinkNode<T>;//insert new LinkNode
